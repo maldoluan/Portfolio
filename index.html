@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Landy Maldonado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b', // Slate 800 - Seriedade e Confiança
+                        secondary: '#334155', // Slate 700
+                        accent: '#0284c7', // Sky 600 - Calma e Comunicação
+                        light: '#f8fafc', // Slate 50
+                        warm: '#ea580c', // Orange 600 - Pequenos detalhes para energia/humanidade
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'], // Fonte serifada mais clássica para humanidades
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Animação suave para os cards */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #0284c7;
+        }
+
+        /* Estilo do Modal (Pop-up) */
+        #cert-modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s;
+        }
+        #cert-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #cert-modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col md:flex-row min-h-screen">
+
+    <aside class="w-full md:w-80 bg-primary text-white flex-shrink-0 md:h-screen md:sticky md:top-0 z-50 flex flex-col justify-between shadow-2xl">
+        <div class="p-6 flex justify-between items-center md:block border-b border-slate-700 md:border-none">
+            <div>
+                <h1 class="text-2xl font-serif font-bold tracking-wide leading-tight">LANDY<br>MALDONADO</h1>
+                <p class="text-slate-400 text-sm mt-2 font-light">Apoio Social & Ações Humanitárias</p>
+            </div>
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="hidden md:flex flex-col px-6 py-4 space-y-1 flex-grow overflow-y-auto">
+            <a href="#home" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-home w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Início</span>
+            </a>
+            <a href="#about" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-user w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Perfil</span>
+            </a>
+            <a href="#experience" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-hands-helping w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Experiência</span>
+            </a>
+            <a href="#education" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-graduation-cap w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Formação</span>
+            </a>
+            <a href="#courses" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-book-open w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Cursos & Migração</span>
+            </a>
+            <a href="#skills" class="flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-slate-700 transition-colors group">
+                <i class="fas fa-list-check w-5 text-center text-slate-400 group-hover:text-white"></i>
+                <span class="group-hover:translate-x-1 transition-transform text-sm uppercase tracking-wider">Competências</span>
+            </a>
+        </nav>
+
+        <div class="hidden md:block p-6 border-t border-slate-700 bg-slate-800">
+            <div class="flex flex-col gap-3 text-sm text-slate-300">
+                <a href="mailto:maldonadotenepel@gmail.com" class="flex items-center gap-2 hover:text-white transition-colors">
+                    <i class="fas fa-envelope w-4"></i> maldonadotenepel@gmail.com
+                </a>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-phone w-4"></i> +58 412-3476483
+                </div>
+                <div class="flex items-center gap-2 text-xs text-accent mt-2">
+                    <i class="fas fa-map-marker-alt w-4"></i> Disponível para Porto Velho/RO
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-grow p-6 md:p-12 lg:p-16 overflow-y-auto bg-slate-50 relative">
+        
+        <section id="home" class="min-h-[70vh] flex flex-col justify-center mb-16 animate-fade-in pt-10 md:pt-0">
+            <div class="max-w-4xl">
+                <div class="inline-block bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+                    Disponível para mudança imediata
+                </div>
+                <h2 class="text-4xl md:text-6xl font-serif font-bold text-primary mb-6 leading-tight">
+                    Compromisso com a <br><span class="text-accent">proteção social</span> e a integração digna.
+                </h2>
+                <p class="text-lg text-slate-600 mb-8 max-w-2xl leading-relaxed">
+                    Venezuelano com sólida experiência em apoio social e ações humanitárias em contextos de crise. Comprometido com a defesa de direitos e construção de redes de proteção para famílias em vulnerabilidade.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-slate-700 transition-all shadow-lg flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Entrar em Contato
+                    </a>
+                    <a href="#experience" class="bg-white border border-slate-300 text-primary px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 hover:border-accent transition-all flex items-center gap-2">
+                        Ver Experiência
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="mb-20 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-1 w-10 bg-accent"></div>
+                <h3 class="text-2xl font-serif font-bold text-primary">Perfil Profissional</h3>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/4 flex flex-col items-center">
+                        <div class="w-32 h-32 rounded-full bg-slate-200 overflow-hidden mb-4 border-4 border-slate-100 shadow-md">
+                            <div class="w-full h-full flex items-center justify-center bg-slate-300 text-slate-500">
+                                <i class="fas fa-user text-5xl"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="font-bold text-primary">Landy Maldonado</h4>
+                            <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Cidadão Venezuelano</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-3/4">
+                        <p class="text-slate-700 mb-4 leading-relaxed text-justify">
+                            Participante ativo do Projeto Ler (PUC Minas) e formado pela Caritas Brasil no Programa Nacional de Formação em Migração e Refúgio (2025). Atuou por mais de dois anos como Assistente de Apoio Social IV no projeto "Voice of the Children", da Fundación Arcadia, apoiando crianças e famílias em situação de vulnerabilidade.
+                        </p>
+                        <p class="text-slate-700 mb-6 leading-relaxed text-justify">
+                            Comprometido com a defesa de direitos, integração digna de migrantes e construção de redes de proteção. Disposto a mudar para Porto Velho para contribuir com projetos de acolhimento e proteção, estando também disponível para trabalho remoto.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm bg-slate-50 p-4 rounded-lg border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-map-marker-alt text-warm w-5 text-center"></i>
+                                <span>Disp. Porto Velho/RO | Remoto</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-envelope text-warm w-5 text-center"></i>
+                                <span class="break-all">maldonadotenepel@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-phone text-warm w-5 text-center"></i>
+                                <span>+58 412-3476483</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-id-card text-warm w-5 text-center"></i>
+                                <span>Documentação Regular</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="mb-20 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="h-1 w-10 bg-accent"></div>
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-primary">Experiência em Proteção e Área Social</h3>
+                    <p class="text-xs text-slate-500 mt-1"><i class="fas fa-images"></i> Clique nos cards para ver fotos ou evidências</p>
+                </div>
+            </div>
+            
+            <div class="relative border-l-2 border-slate-200 ml-3 space-y-12">
+                
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-2 w-4 h-4 bg-white border-4 border-accent rounded-full"></div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card cursor-pointer relative group"
+                         onclick="openCert('Assistente de Apoio Social IV - Fundación Arcadia', 'assets/cert-arcadia.jpg')">
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-100 p-2 rounded-full text-accent shadow-sm">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                            <h4 class="text-lg font-bold text-primary group-hover:text-accent transition-colors">Assistente de Apoio Social IV</h4>
+                            <span class="text-sm text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full mt-2 sm:mt-0">Jan/2017 – Dez/2018</span>
+                        </div>
+                        <h5 class="text-accent font-semibold mb-3">Fundación Arcadia (Projeto "Voice of the Children")</h5>
+                        <p class="text-xs text-slate-400 mb-3 italic">ONG registrada em Washington, DC</p>
+                        <ul class="space-y-2 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Atuação direta em apoio social a crianças e famílias em situação de vulnerabilidade.</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Acompanhamento de casos, escuta qualificada e encaminhamento para serviços básicos.</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Apoio na organização de atividades socioeducativas e esportivas.</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Trabalho em equipe multidisciplinar dentro de uma organização sem fins lucrativos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-accent rounded-full transition-colors"></div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card cursor-pointer relative group"
+                         onclick="openCert('Gestão Logística - Apoio Humanitário', 'assets/cert-logistica.jpg')">
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-100 p-2 rounded-full text-accent shadow-sm">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                            <h4 class="text-lg font-bold text-primary group-hover:text-accent transition-colors">Apoio Humanitário em Contexto de Crise</h4>
+                            <span class="text-sm text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full mt-2 sm:mt-0">2016 – 2018</span>
+                        </div>
+                        <h5 class="text-accent font-semibold mb-3">Venezuela</h5>
+                        <ul class="space-y-2 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Gestão logística de medicamentos e insumos médicos provenientes do exterior durante a crise humanitária.</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Coordenação de deslocamentos pelo território nacional para garantir acesso a suprimentos essenciais.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-accent rounded-full transition-colors"></div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card cursor-pointer relative group"
+                         onclick="openCert('Casa de Acolhimento', 'assets/cert-casa-acolhimento.jpg')">
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-100 p-2 rounded-full text-accent shadow-sm">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                            <h4 class="text-lg font-bold text-primary group-hover:text-accent transition-colors">Casa de Acolhimento para Crianças e Adolescentes</h4>
+                            <span class="text-sm text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full mt-2 sm:mt-0">Venezuela</span>
+                        </div>
+                        <ul class="space-y-2 text-slate-600 text-sm mt-3">
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Apoio administrativo e manutenção dos espaços físicos.</li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check text-accent mt-1 text-xs"></i> Acompanhamento acadêmico e apoio às atividades esportivas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education" class="mb-20 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-1 w-10 bg-accent"></div>
+                <h3 class="text-2xl font-serif font-bold text-primary">Formação Acadêmica</h3>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-start gap-4 hover-card">
+                <div class="bg-blue-50 p-4 rounded-lg text-accent hidden sm:block">
+                    <i class="fas fa-laptop-code text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-primary">Tecnólogo Universitário em Informática</h4>
+                    <p class="text-slate-600 font-medium">I.U.T. Val</p>
+                    <p class="text-sm text-slate-500 mt-1">2009 – 2011</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="mb-20 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-1 w-10 bg-accent"></div>
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-primary">Formação em Migração e Idioma</h3>
+                    <p class="text-xs text-slate-500 mt-1"><i class="fas fa-info-circle"></i> Clique nos nomes dos cursos para ver os certificados</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-l-accent border-y-slate-200 border-r-slate-200 hover-card group cursor-pointer relative" 
+                     onclick="openCert('Formação Nacional em Migração e Refúgio', 'assets/cert-caritas.jpg')">
+                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded">2025</span>
+                        <i class="fas fa-certificate text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Formação Nacional em Migração e Refúgio</h4>
+                    <p class="text-accent font-medium text-sm mb-3">Caritas Brasil</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Curso completo sobre políticas públicas, direitos humanos, redes de proteção e regularização migratória.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card group cursor-pointer relative"
+                     onclick="openCert('Projeto Ler – Leitura e Escrita', 'assets/cert-puc-ler.jpg')">
+                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded">2024 - Atual</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Projeto Ler – Leitura e Escrita</h4>
+                    <p class="text-accent font-medium text-sm mb-3">PUC Minas / SJMR (4º Semestre)</p>
+                    <p class="text-sm text-slate-600">
+                        Foco em aprendizado contínuo, letramento e integração social.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card group cursor-pointer relative"
+                     onclick="openCert('Português para Fins Acadêmicos', 'assets/cert-ufu.jpg')">
+                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">Nota 9.0</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Português para Fins Acadêmicos</h4>
+                    <p class="text-accent font-medium text-sm mb-3">IsF Rede Andifes / UFU (2025)</p>
+                    <p class="text-sm text-slate-600">
+                        Escuta qualificada e expressão oral em contextos de vulnerabilidade.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card group cursor-pointer relative"
+                     onclick="openCert('Português PLE - Módulo 3', 'assets/cert-unila.jpg')">
+                     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                     <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">Nota 9.0</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Português PLE - Módulo 3</h4>
+                    <p class="text-accent font-medium text-sm mb-3">UNILA (2025)</p>
+                    <p class="text-sm text-slate-600">
+                        80h. Leitura, escrita, compreensão auditiva e uso em contextos institucionais.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card group cursor-pointer relative"
+                     onclick="openCert('Português Intermediário III', 'assets/cert-cibai-3.jpg')">
+                     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                     <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">2025</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Português Intermediário III</h4>
+                    <p class="text-accent font-medium text-sm mb-3">CIBAI Migrações</p>
+                    <p class="text-sm text-slate-600">
+                        30h. Gramática avançada, produção textual, pronúncia e entonação.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card group cursor-pointer relative"
+                     onclick="openCert('Português Básico II', 'assets/cert-cibai-2.jpg')">
+                     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                     <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">2024</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Português Básico II</h4>
+                    <p class="text-accent font-medium text-sm mb-3">CIBAI Migrações</p>
+                    <p class="text-sm text-slate-600">
+                        30h. Introdução à língua portuguesa, vocabulário cotidiano.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover-card md:col-span-2 lg:col-span-1 group cursor-pointer relative"
+                     onclick="openCert('Pronúncia, Ritmo e Entonação', 'assets/cert-ufrn.jpg')">
+                     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-expand text-accent"></i>
+                    </div>
+                     <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">2024</span>
+                        <i class="fas fa-language text-slate-300 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h4 class="font-bold text-primary text-lg mb-1 group-hover:text-accent transition-colors underline decoration-dotted decoration-slate-300 underline-offset-4">Pronúncia, Ritmo e Entonação</h4>
+                    <p class="text-accent font-medium text-sm mb-3">UFRN</p>
+                    <p class="text-sm text-slate-600">
+                        20h. Desenvolvimento da fluência oral e clareza na comunicação.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="mb-20 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-1 w-10 bg-accent"></div>
+                <h3 class="text-2xl font-serif font-bold text-primary">Competências e Idiomas</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2">
+                        <i class="fas fa-heart text-warm"></i> Competências Humanitárias
+                    </h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Escuta Qualificada</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Acompanhamento de Casos</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Sensibilidade Intercultural</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Trabalho em Equipe</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Organização de Atividades</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Adaptação a Novos Contextos</span>
+                        <span class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:border-accent hover:text-accent transition-colors cursor-default">Realidade Migratória</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2">
+                        <i class="fas fa-globe text-accent"></i> Idiomas & Outros
+                    </h4>
+                    <div class="space-y-4 bg-white p-5 rounded-xl border border-slate-200">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold text-primary">Espanhol</span>
+                                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Nativo</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold text-primary">Português</span>
+                                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Avançado</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Leitura, escrita e conversação fluida</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                         <h5 class="text-sm font-bold text-slate-700 mb-2">Outros</h5>
+                         <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded text-xs font-medium border border-slate-200 inline-block">Informática / Suporte Técnico</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="mt-10 pt-10 border-t border-slate-200 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="mb-2 md:mb-0">
+                    <h2 class="text-2xl font-serif font-bold text-primary">Vamos conversar?</h2>
+                    <p class="text-slate-500 mt-1 mb-4">Estou à disposição para entrevistas e novos desafios.</p>
+                    <div class="inline-flex items-center gap-2 text-slate-600 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
+                         <i class="fas fa-phone text-accent"></i> +58 412-3476483
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <a href="https://drive.google.com/file/d/18hS0YcffAOwjeEYvxUlgFFH-k6Q85DEc/view?usp=sharing" class="bg-slate-200 text-slate-700 px-6 py-4 rounded-lg hover:bg-slate-300 hover:text-primary transition-all shadow-sm flex items-center justify-center gap-2 font-medium group" title="Ver experiências em Informática e TI">
+                        <i class="fas fa-laptop-code group-hover:scale-110 transition-transform"></i> 
+                        <span>Ver CV Técnico / TI</span>
+                    </a>
+                    
+                    <a href="mailto:maldonadotenepel@gmail.com" class="bg-primary text-white px-8 py-4 rounded-lg hover:bg-slate-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 font-semibold">
+                        <i class="fas fa-paper-plane"></i> 
+                        <span>Enviar E-mail</span>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-slate-400 text-xs mt-12 pb-4 border-t border-slate-200/50 pt-6">
+                &copy; 2025 Landy Maldonado.
+            </div>
+        </footer>
+
+    </main>
+
+    <div id="cert-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-up">
+            <div class="flex justify-between items-center p-4 border-b border-slate-100 bg-slate-50">
+                <h3 id="modal-title" class="text-lg font-bold text-primary truncate pr-4">Título do Certificado</h3>
+                <button onclick="closeCert()" class="text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-auto bg-slate-200 flex items-center justify-center p-2 sm:p-8">
+                <img id="modal-img" src="" alt="Certificado" class="max-w-full max-h-[70vh] shadow-lg rounded-md object-contain">
+            </div>
+            
+            <div class="p-4 border-t border-slate-100 bg-white flex justify-end">
+                <button onclick="closeCert()" class="bg-slate-100 text-slate-700 px-6 py-2 rounded-lg hover:bg-slate-200 transition-colors font-medium">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Controle do Menu Mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Fecha menu ao clicar em link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    menuBtn.querySelector('i').classList.add('fa-bars');
+                    menuBtn.querySelector('i').classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Lógica do Modal de Certificados
+        const modal = document.getElementById('cert-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+
+        function openCert(title, imageUrl) {
+            modalTitle.innerText = title;
+            modalImg.src = imageUrl;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Impede scroll da página de fundo
+        }
+
+        function closeCert() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Libera scroll
+            setTimeout(() => {
+                modalImg.src = ''; // Limpa a imagem
+            }, 300);
+        }
+
+        // Fechar modal ao clicar fora da área de conteúdo
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeCert();
+            }
+        });
+
+        // Fechar com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeCert();
+            }
+        });
+    </script>
+</body>
+</html>
