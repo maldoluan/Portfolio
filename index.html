@@ -164,11 +164,20 @@
             <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="w-full md:w-1/4 flex flex-col items-center">
-                        <div class="w-32 h-32 rounded-full bg-slate-200 overflow-hidden mb-4 border-4 border-slate-100 shadow-md">
-                            <div class="w-full h-full flex items-center justify-center bg-slate-300 text-slate-500">
+                        
+                        <!-- ALTERAÇÃO AQUI: Container com efeito Hover para foto -->
+                        <div class="w-32 h-32 rounded-full bg-slate-200 overflow-hidden mb-4 border-4 border-slate-100 shadow-md relative group cursor-pointer">
+                            <!-- 1. A Silhueta (Visível por padrão, some no hover) -->
+                            <div class="w-full h-full flex items-center justify-center bg-slate-300 text-slate-500 absolute inset-0 transition-opacity duration-500 opacity-100 group-hover:opacity-0">
                                 <i class="fas fa-user text-5xl"></i>
                             </div>
+
+                            <!-- 2. A Sua Foto (Invisível por padrão, aparece no hover) -->
+                            <!-- IMPORTANTE: Coloque sua foto na pasta assets com o nome 'profile.jpg' ou mude o nome aqui -->
+                            <img src="assets/profile.jpg" alt="Landy Maldonado" class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100">
                         </div>
+                        <!-- FIM DA ALTERAÇÃO -->
+
                         <div class="text-center">
                             <h4 class="font-bold text-primary">Landy Maldonado</h4>
                             <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Cidadão Venezuelano</p>
